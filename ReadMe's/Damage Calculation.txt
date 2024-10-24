@@ -1,8 +1,55 @@
 Refereences:
 https://warframe.fandom.com/wiki/Damage/Calculation#:~:text=Dealing%20damage%20is%20quantized.&text=For%20each%20damage%20type%20that,in%20the%20mission%27s%20damage%20calculations.
+https://warframe.fandom.com/wiki/Nagantaka_Prime
+
 
 Quantization
 Dealing damage is qunatized, meaning physical/elemental damage round to the nearest multiple of 1/16th of their attacks base damage before beign multiplied further.
 By using this method, the percision of data is reduced resulting in less storage spaced used and improved computer operation efficency.
 Rather than a lengthy integer of each element's value, only one "total" integer along with short representative multiples of 1/16th need to be communicated.
 Scale = (Modded Base Damage) / 16
+
+For each damage type that a weapon deals, the base damage for that type is first divided by the scale -> made into an int -> then multiplied by the scale
+This quantized value will be used in the mission's damage calculations
+The final seen in-game pop-ups are rounded once more
+Quantized Damage Type Value = Rounded((Total DMG Type Value) / Scale) * Scale
+
+Example:
+1. You have a weapon with a listed distribution of the following, totaling to 100
+    30 Imp
+    40 Sl
+    30 Pnct
+2. The scale value is therefore 6.25
+    scale = total / 16 -> scale = 100 / 6.25
+3. The amount of dmg done by type would be as follows
+    Imp = 21.25 
+        30 / 6.25 = 4.8
+        rounded, then multiplied by scale:
+            4.8 -> 5
+            5 * 6.25 -> 31.25
+    This is repeated for pnct & Sl resulting in 31.25 and 37.5 respectively
+4. As such, when dmging something like a Charger(50% bonus to slash) the dmg would be calcutlated as follows
+    31.25 + 31.25 + 37.5 * (1.5) = 118.75 (would display as 119)
+Note that mods such as Hornet Strike (+ 220% dmg) or Bane mods (1.3x dmg to faction) and any other multipliers would only affect the final quntized value (118.75) and not scale or damage compisition
+
+If physical (Sl, Imp, Punc) or elemental (txn, cld, etc...) mod is applied, the bonus is also quantized
+1. The value of the example scale will still be 100 / 16 = 6.25 as elemental / physical bonuses do not affect the scale
+2. If Maim (120% slash) was used, the Sl bonus calculates seperately using the BASE PORTION of slaes, and adds to the total
+    (40 * 1.2) / 6.25 = 50
+3. The dmg distribution would then be as follows
+    Imp -> 31.25
+    Pnct -> 31.25
+    Sl -> 37.5 + 50 = 87.5
+4. Elemental bonuses calculate using the FULL base dmg, rounded to the nearest 1/16 of the base dmg and added to the total
+5. Elements formed by a sum of mods and bonuses qunatize their sum alone.
+
+
+Full application
+Demonstrating the full math, assume the following
+Nagantaka Prime:
+    Imp -> 1.7 Pnct -> 15.6 Sl -> 155.7
+    Crit -> 25% | 2.3x
+    Sc -> 39
+    Fr -> 2.5
+    Ms -> 1
+Mods:

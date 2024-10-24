@@ -1,0 +1,9 @@
+Dmg Types
+Physical:
+    Impact -> Imp
+    Puncture -> Pnct
+    Slash -> Sl
+Elemental:
+    Toxin -> Txn
+    Radiation -> Rad
+    
