@@ -97,7 +97,7 @@ Unarmored enemies
 Armored enemies
     Note that enemies who have both shields and armor, dmg to shields is not mitigated by armor
     When toxin is applied to a shielded target it is GENERALLY applied directly to Health
-
+    
 Against armored enemies the formula is as follows:
     DM = (300/ (300 + AR(1-AM))) * (1 + AM)(1 + HM)
         AM is the damage modifier against armor type
