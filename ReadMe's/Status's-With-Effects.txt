@@ -1,0 +1,9 @@
+References:
+https://warframe.fandom.com/wiki/Status_Effect
+https://en.wiktionary.org/wiki/proc
+
+A status(proc) is an effect which can be triggered at random by a hit from a weapon or wf ability.
+Status Chance(SC) is the probability that a hit will inflict a status effect.
+The base duration of a proc depends on its type. WF abilities usually have higher proc chance.
+
+Each dmg type is associated with a status effect. Weapons that deal multiple types have a separate chance to inflict its associated status effect on a target and only one type can proc per hit unless sc is over 100%. (https://warframe.fandom.com/wiki/Status_Effect#Status_Chance)

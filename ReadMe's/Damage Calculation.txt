@@ -1,0 +1,8 @@
+Refereences:
+https://warframe.fandom.com/wiki/Damage/Calculation#:~:text=Dealing%20damage%20is%20quantized.&text=For%20each%20damage%20type%20that,in%20the%20mission%27s%20damage%20calculations.
+
+Quantization
+Dealing damage is qunatized, meaning physical/elemental damage round to the nearest multiple of 1/16th of their attacks base damage before beign multiplied further.
+By using this method, the percision of data is reduced resulting in less storage spaced used and improved computer operation efficency.
+Rather than a lengthy integer of each element's value, only one "total" integer along with short representative multiples of 1/16th need to be communicated.
+Scale = (Modded Base Damage) / 16
