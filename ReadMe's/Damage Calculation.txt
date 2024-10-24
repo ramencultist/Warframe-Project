@@ -44,7 +44,7 @@ If physical (Sl, Imp, Punc) or elemental (txn, cld, etc...) mod is applied, the 
 5. Elements formed by a sum of mods and bonuses qunatize their sum alone.
 
 
-Full application
+Full application 
 Demonstrating the full math, assume the following
 Nagantaka Prime:
     Imp -> 1.7 Pnct -> 15.6 Sl -> 155.7
@@ -52,4 +52,53 @@ Nagantaka Prime:
     Sc -> 39
     Fr -> 2.5
     Ms -> 1
-Mods:
+    total -> 173
+Mods: Numbers are %'s
+    Cryo Rounds -> 90 cold
+    Malignant Force -> 60 Txn | 60 Sc
+    Hellfire -> 90 Heat
+    Piercing Caliber -> 120 Pnct 
+    Gas Valence Formation -> 200 Gas
+Scale (S): 10.8125
+    173 / 16 = 10.8125
+Elemental and Physical Quantization:
+    Round(((90 cld + 60 txn) * 173 ) / S) * S = 259.5 Viral
+    Round((90 Heat * 173) / S) * S = 151.375 Heat
+    Round((120 pnct * 15.6 base pnct) / S) * S = 21.625 Pnct
+    Round((200 gas * 173) / S) * S = 346 Gas
+Base Quantization:
+    Round(1.7 imp / s) * s = 0 Imp
+        Note since impact is so low, it'll round to zero and not be registered during attacks
+    Round(15.6 pnct / S) * S = 10.8125 Pnct
+    Round(155.7 Sl / S) * S = 151.375 Sl
+Total: 940.6875
+    0 impt + 10.8125 pnct + 151.375 sl + 259.5 Viral + 151.375 Heat + 21.625 pnct + 346 gas = 940.6875
+
+
+Summary
+    Calculating damage with quantization can be simplified in the following steps
+        Get scale
+        Quantize Elements
+        Quantize IPS
+        Combine above
+        Add all other multipliers
+
+
+Improtant for following sections
+    Damage Modifies (DM) = 1 + Health-type Modifier
+    Inflicted Damage (ID) = Staring Damage * Damage Modifier
+
+
+Unarmored enemies
+    Inflicted Damage (ID) = Starting Damage (SD) * (1 + Health-Type Modifier (HM))
+        note that HM can be either shields or Health
+
+
+Armored enemies
+    Note that enemies who have both shields and armor, dmg to shields is not mitigated by armor
+    When toxin is applied to a shielded target it is GENERALLY applied directly to Health
+
+Against armored enemies the formula is as follows:
+    DM = (300/ (300 + AR(1-AM))) * (1 + AM)(1 + HM)
+        AM is the damage modifier against armor type
+        AR is the target's armor after all reductions from debuffs
