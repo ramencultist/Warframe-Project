@@ -1,0 +1,1 @@
+mods = {"Amalgam Serration": "Damage 155", }
